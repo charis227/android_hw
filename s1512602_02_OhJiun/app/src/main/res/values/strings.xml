@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">s1512602_02_OhJiun</string>
+
+    <string name="place01">전주</string>
+    <string name="place02">제주</string>
+    <string name="place03">부산</string>
+    
+    <string name="pic0101">경기전</string>
+    <string name="pic0102">전동성당</string>
+    <string name="pic0103">최명희문학관</string>
+
+    <string name="pic0201">협재 해수욕장</string>
+    <string name="pic0202">한라산</string>
+    <string name="pic0203">성산일출봉</string>
+
+    <string name="pic0301">해운대</string>
+    <string name="pic0302">태종대</string>
+    <string name="pic0303">용궁사</string>
+
+    <string name="src0101">gyeonggijeon</string>
+    <string name="src0102">jeondongcastle</string>
+    <string name="src0103">choiliterature</string>
+
+    <string name="src0201">jejusea</string>
+    <string name="src0202">halla</string>
+    <string name="src0203">seonsan</string>
+
+    <string name="src0301">busansea</string>
+    <string name="src0302">taejongdae</string>
+    <string name="src0303">yonggoongsa</string>
+
+</resources>

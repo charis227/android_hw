@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">s1512602_03_OhJiun</string>
+
+    <string name="genre01">팝</string>
+    <string name="genre02">클래식</string>
+    <string name="genre03">뉴에이지</string>
+
+    <string name="genre0101">it_was_always_you</string>
+    <string name="genre0102">one_call_away</string>
+    <string name="genre0103">a_thousand_years</string>
+
+    <string name="genre0201">brandenburg_1</string>
+    <string name="genre0202">brandenburg_2</string>
+    <string name="genre0203">brandenburg_3</string>
+
+    <string name="genre0301">you_were_there</string>
+    <string name="genre0302">song_of_life</string>
+    <string name="genre0303">how_shall_i_sing_that_majesty</string>
+
+    <string name="genre0101title">It was always you</string>
+    <string name="genre0102title">One call away</string>
+    <string name="genre0103title">A thousand years</string>
+
+    <string name="genre0101singer">maroon5</string>
+    <string name="genre0102singer">Charlie Puth</string>
+    <string name="genre0103singer">Christina Perri</string>
+
+    <string name="genre0201title">Brandenburg Concerto No.3 I</string>
+    <string name="genre0202title">Brandenburg Concerto No.3 II</string>
+    <string name="genre0203title">Brandenburg Concerto No.3 III</string>
+
+    <string name="genre0201singer">N. Harnoncourt</string>
+    <string name="genre0202singer">J. S. Bach</string>
+    <string name="genre0203singer">Concentus Musicus Wien</string>
+
+    <string name="genre0301singer">Tom Cully</string>
+    <string name="genre0302singer">Ralph Skan</string>
+    <string name="genre0303singer">Stephen Leadbeater</string>
+
+    <string name="genre0301title">You were there</string>
+    <string name="genre0302title">Song of life</string>
+    <string name="genre0303title">How shall I sing that majesty</string>
+</resources>

@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:id="@+id/linearLayout"
+        >
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="0.3"
+            android:src="@drawable/noonsong" />
+
+            <TextView
+                android:id="@+id/nameView"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight="0.7"
+                android:background="#fff0ad"
+                android:text="@string/name" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="#adffae"
+        android:id="@+id/degreeView"
+        android:text="@string/degree"
+        android:layout_below="@id/linearLayout"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="#ade9ff"
+        android:id="@+id/careerView"
+        android:text="@string/career"
+        android:layout_below="@+id/degreeView"
+        />
+
+</RelativeLayout>
