@@ -74,28 +74,46 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
             gravityArr = event.values;
-        else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
+        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
             magneticArr = event.values;
 
-        float R[] = new float[9];
-        float I[] = new float[9];
-        SensorManager.getRotationMatrix(R, I, gravityArr, magneticArr);
-        float orientation[] = new float[3];
-        SensorManager.getOrientation(R, orientation);
-        azimuth = (float) Math.toDegrees(orientation[0]);
-        pitch = (float) Math.toDegrees(orientation[1]);
-        roll = (float) Math.toDegrees(orientation[2]);
+        if (gravityArr!=null && magneticArr!=null) {
+            float R[] = new float[9];
+            float I[] = new float[9];
+            boolean isSuccessful = SensorManager.getRotationMatrix(R, I, gravityArr, magneticArr);
+            if (isSuccessful) {
+                SensorManager.getRotationMatrix(R, I, gravityArr, magneticArr);
+                float orientation[] = new float[3];
+                SensorManager.getOrientation(R, orientation);
+//                azimuth = orientation[0];
+                azimuth = ((float) Math.toDegrees(orientation[0])+360) % 360;
 
-        String result;
-        result = "Azimuth:" + azimuth;
-        tvAzimuth.setText(result);
+                String result="";
 
-        float newAngle = event.values[0];
-        String text = Float.toString(newAngle);
-       tvAzimuth.setText(text);
-        ObjectAnimator rotator = ObjectAnimator.ofFloat(compass,
-                "rotation", prev, newAngle);
-        rotator.start();
-        prev = newAngle;
+                if (azimuth>=0 && azimuth<45.0)
+                    result = "북 " + azimuth;
+                else if (azimuth>=45.0f && azimuth<90.0f)
+                    result = "북동 "+azimuth;
+                else if (azimuth>=90f && azimuth<135.0f)
+                    result = "동 "+azimuth;
+                else if (azimuth>=135.0f && azimuth<180.0f)
+                    result = "남동 "+azimuth;
+                else if (azimuth>=180.0f && azimuth<225.0f)
+                    result = "남 "+azimuth;
+                else if (azimuth>=225.5f && azimuth<270.0f)
+                    result = "남서 "+azimuth;
+                else if (azimuth>=270.0f && azimuth<315.0f)
+                    result = "서 "+azimuth;
+                else if (azimuth>=315.0f && azimuth<360.0f)
+                    result = "북서 "+azimuth;
+
+                tvAzimuth.setText(result);
+
+                ObjectAnimator rotator = ObjectAnimator.ofFloat(compass,
+                        "rotation", prev, azimuth);
+                rotator.start();
+                prev = azimuth;
+            }
+        }
     }
 }
