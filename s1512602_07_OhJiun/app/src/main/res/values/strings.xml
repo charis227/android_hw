@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">s1512602_07_OhJiun</string>
+    <string name="univ">숙명여자대학교</string>
+    <string name="dept">소프트웨어학부</string>
+    <string name="naver">NAVER</string>
+    <string name="choice">선택</string>
+    <string name="manual">수동 입력</string>
+    <string name="hint">http://</string>
+</resources>

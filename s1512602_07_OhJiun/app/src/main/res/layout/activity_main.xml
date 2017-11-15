@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <RadioGroup
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/button_univ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/univ" />
+
+        <RadioButton
+            android:id="@+id/button_dept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dept" />
+
+        <RadioButton
+            android:id="@+id/button_naver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/naver" />
+
+    </RadioGroup>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:text="@string/choice"
+        android:layout_gravity="center"
+        android:id="@+id/selectButton"
+        />
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputText"
+        android:layout_gravity="center"
+        android:text="@string/hint"
+        />
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/manual"
+        android:id="@+id/manualButton"
+        />
+
+</LinearLayout>
