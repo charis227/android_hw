@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/p1"
         android:id="@+id/compass"
+        android:layout_gravity="center_vertical"
         />
 
 </LinearLayout>

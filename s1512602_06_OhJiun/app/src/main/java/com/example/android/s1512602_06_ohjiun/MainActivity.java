@@ -34,17 +34,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         compass = (ImageView) findViewById(R.id.compass);
 
-        compass.measure(compass.getMeasuredWidth(), compass.getMeasuredHeight());
-        int compassHeight = compass.getMeasuredHeight();
-        int compassWidth = compass.getMeasuredWidth();
-        int screenWidth = size.x;
-        int screenHeight = size.y;
-
-        int x = screenWidth/2 - compassWidth/2;
-        int y = screenHeight/2 - compassHeight/2;
-//        compass.setX(x);
-//        compass.setY(y);
-
         tvAzimuth = (TextView) findViewById(R.id.azimuth);
         prev = 0.0f;
 
