@@ -18,10 +18,10 @@
             android:text="@string/univ" />
 
         <RadioButton
-            android:id="@+id/button_dept"
+            android:id="@+id/button_aladin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dept" />
+            android:text="@string/aladin" />
 
         <RadioButton
             android:id="@+id/button_naver"
