@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class WriteActivity extends AppCompatActivity {
-    static final String FILENAME = "test.txt";
+    static final String FILENAME = "contact.txt";
     EditText etName, etPhone, etAddress;
 
     @Override
