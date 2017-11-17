@@ -47,20 +47,24 @@ public class WriteActivity extends AppCompatActivity {
     }
 
     private void writeInfo () {
-
         try {
-            String name, phone, address, line;
             FileOutputStream fileOutputStream = openFileOutput(FILENAME, Context.MODE_APPEND);
             PrintWriter printWriter = new PrintWriter(fileOutputStream);
-            name = etName.getText().toString();
-            phone = etPhone.getText().toString();
-            address = etAddress.getText().toString();
-            line = name+" "+phone+" "+address;
+            String line = getContent();
             printWriter.println(line);
             printWriter.close();
         } catch (Exception e) {
             Log.v("쓰기", "에러");
         }
+    }
+
+    private String getContent() {
+        String name, phone, address, line;
+        name = etName.getText().toString();
+        phone = etPhone.getText().toString();
+        address = etAddress.getText().toString();
+        line = name+" "+phone+" "+address;
+        return line;
     }
 
     private void clearText() {

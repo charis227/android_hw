@@ -18,8 +18,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
-    final String FILENAME = "contact.txt";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,28 +33,34 @@ public class ListActivity extends AppCompatActivity {
                     }
                 }
         );
-
     }
 
     private void printList() {
+        final String FILENAME = "contact.txt";
         TextView tvList = (TextView) findViewById(R.id.list_view);
-        String result="";
         try {
-            File file = getFileStreamPath(FILENAME);
-            if (file.exists()) {
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                while (true) {
-                    String listContent = bufferedReader.readLine();
-                    if (listContent == null)
-                        break;
-                    result = result + listContent + "\n";
-                }
-                bufferedReader.close();
-            }
+            String result = getListContent(FILENAME);
+            tvList.setText(result);
         } catch (IOException e) {
             Log.v("읽기", "파일 없음");
         }
-        tvList.setText(result);
+    }
+
+    private String getListContent(String FILENAME) throws IOException {
+        String result="";
+        File file = getFileStreamPath(FILENAME);
+
+        if (file.exists()) {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            while (true) {
+                String listContent = bufferedReader.readLine();
+                if (listContent == null)
+                    break;
+                result = result + listContent + "\n";
+            }
+            bufferedReader.close();
+        }
+        return result;
     }
 
     private void goBack() {
