@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class WriteActivity extends AppCompatActivity {
-    static final String FILENAME = "contact.txt";
+    static final String FILENAME = "test.txt";
     EditText etName, etPhone, etAddress;
 
     @Override
@@ -49,29 +49,18 @@ public class WriteActivity extends AppCompatActivity {
     private void writeInfo () {
 
         try {
-            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_APPEND);
             String name, phone, address, line;
+            FileOutputStream fileOutputStream = openFileOutput(FILENAME, Context.MODE_APPEND);
+            PrintWriter printWriter = new PrintWriter(fileOutputStream);
             name = etName.getText().toString();
             phone = etPhone.getText().toString();
             address = etAddress.getText().toString();
             line = name+" "+phone+" "+address;
-            fos.write(line.getBytes());
-            fos.close();
-        } catch (IOException e) {
-        }
-
-        /*
-        try {
-            String name, phone, address;
-            PrintWriter printWriter = new PrintWriter(new FileWriter(FILENAME, true));
-            name = etName.getText().toString();
-            phone = etPhone.getText().toString();
-            address = etAddress.getText().toString();
-            printWriter.println(name+" "+phone+" "+address);
+            printWriter.println(line);
             printWriter.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.v("쓰기", "에러");
-        } */
+        }
     }
 
     private void clearText() {
