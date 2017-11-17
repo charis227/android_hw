@@ -3,6 +3,8 @@ package com.example.android.r1512602_03_ohjiun;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.io.FileInputStream;
@@ -24,6 +26,26 @@ public class WriteActivity extends AppCompatActivity {
         etPhone = (EditText) findViewById(R.id.edit_phone);
         etAddress = (EditText) findViewById(R.id.edit_address);
 
+        findViewById(R.id.write_button).setOnClickListener(
+                new Button.OnClickListener() {
+                        public void onClick(View v) {
+                            writeInfo();
+                            clearText();
+                        }
+                }
+        );
+
+        findViewById(R.id.goBack_button).setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }
+        );
+
+    }
+
+    private void writeInfo () {
         try {
             String name, phone, address;
             PrintWriter printWriter = new PrintWriter(new FileWriter(FILENAME, true));
@@ -35,16 +57,11 @@ public class WriteActivity extends AppCompatActivity {
         } catch (IOException e) {
 
         }
+    }
 
-/*        try {
-            FileInputStream fileInputStream = openFileInput(FILENAME);
-            byte[] buffer = new byte[fileInputStream.available()];
-            fileInputStream.read(buffer);
-            /////////
-            fileInputStream.close();
-        }
-        catch (IOException e) {
-
-        }*/
+    private void clearText() {
+        etName.setText("");
+        etPhone.setText("");
+        etAddress.setText("");
     }
 }
