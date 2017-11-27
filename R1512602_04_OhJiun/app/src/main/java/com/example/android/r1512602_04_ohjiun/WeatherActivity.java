@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -12,6 +13,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
@@ -33,6 +35,7 @@ public class WeatherActivity extends AppCompatActivity {
         tvDistrict.setText("날씨: "+name);
 
         tvWeather = findViewById(R.id.weather);
+        tvWeather.setText("");
 
         String url = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone="+zone;
 
@@ -42,9 +45,8 @@ public class WeatherActivity extends AppCompatActivity {
     private class DownloadWebpageTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... urls) {
             try {
-                return (String)downloadUrl( (String)urls[0] );
-            }
-            catch (IOException e) {
+                return (String) downloadUrl((String) urls[0]);
+            } catch (IOException e) {
                 return "다운로드 실패";
             }
         }
@@ -52,7 +54,6 @@ public class WeatherActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             double latitude[] = new double[30];
             double longitude[] = new double[30];
-            String busNum[] = new String[30];
             int count = 0;
 
             try {
@@ -62,70 +63,74 @@ public class WeatherActivity extends AppCompatActivity {
                 xpp.setInput(new StringReader(result));
                 int eventType = xpp.getEventType();
 
-                //시간(hour),온도(temp), 날씨(wfKor), 강수확률(ps), 바람방향(wdKor)을 출력한다.
+                //시간(hour),온도(temp), 날씨(wfKor), 강수확률(pop), 바람방향(wdKor)을 출력한다.
                 String headerCd = "";
                 String temp = "";
                 String wfKor = "";
-                String ps = "";
+                String pop = "";
                 String wdKor = "";
+                String hour = "";
 
-                boolean isPs = false;
+                boolean isPop = false;
                 boolean isTemp = false;
                 boolean isWfKor = false;
                 boolean isWdKor = false;
                 boolean isHeaderCd = false;
+                boolean isHour = false;
 
                 while (eventType != XmlPullParser.END_DOCUMENT) {
                     if (eventType == XmlPullParser.START_DOCUMENT) {
                         ;
-                    }
-                    else if (eventType == XmlPullParser.START_TAG) {
+                    } else if (eventType == XmlPullParser.START_TAG) {
                         String tagName = xpp.getName();
 //                        if (tagName.equals("headerCd"))
- //                           isHeaderCd = true;
+                        //                           isHeaderCd = true;
+                        if (tagName.equals("hour"))
+                            isHour = true;
                         if (tagName.equals("temp"))
                             isTemp = true;
                         if (tagName.equals("wfKor"))
                             isWfKor = true;
-                        if (tagName.equals("ps"))
-                            isPs = true;
-                    }
-                    else if (eventType == XmlPullParser.TEXT) {
+                        if (tagName.equals("pop"))
+                            isPop = true;
+                        if (tagName.equals("wdKor"))
+                            isWdKor = true;
+                    } else if (eventType == XmlPullParser.TEXT) {
                         if (isHeaderCd) {
                             headerCd = xpp.getText();
                             isHeaderCd = false;
                         }
 //                        if (headerCd.equals("0")) {
-                            if (isTemp) {
-                                temp = xpp.getText();
-                                longitude[count] = Double.parseDouble(temp);
-//                                tvBusLongitude.append(count+" 경도: "+gpsX+"\n");
-                                isTemp = false;
-                            }
-                            if (isWfKor) {
-                                wfKor = xpp.getText();
-                                latitude[count] = Double.parseDouble(wfKor);
-//                                tvBusLatitude.append(count+" 위도: "+gpsY+"\n");
-                                isWfKor = false;
-                            }
-                            if (isPs) {
-                                ps = xpp.getText();
-                                busNum[count] = ps;
-                                //                               tvBusNumber.append(count+" 버스번호: "+plainNo+"\n");
-                                isPs = false;
-                                count++;
-                            }
+                        if (isHour) {
+                            hour = xpp.getText();
+                            isHour = false;
+                        }
+                        if (isTemp) {
+                            temp = xpp.getText();
+                            isTemp = false;
+                        }
+                        if (isWfKor) {
+                            wfKor = xpp.getText();
+                            isWfKor = false;
+                        }
+                        if (isPop) {
+                            pop = xpp.getText();
+                            isPop = false;
+                        }
+                        if (isWdKor) {
+                            wdKor = xpp.getText();
+                            isWdKor = false;
+                            tvWeather.append(count+": 날씨 정보: 시간="+hour+", 온도="+temp+", 날씨="+wfKor+", 강수확률="+pop+"%, 바람="+wdKor+"\n");
+                            count++;
+                        }
 //                        }
-                    }
-                    else if (eventType == XmlPullParser.END_TAG) {
+                    } else if (eventType == XmlPullParser.END_TAG) {
                         ;
                     }
                     eventType = xpp.next();
                 } //while
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 tvWeather.setText(e.getMessage());
-
             }
 
         }//function
@@ -136,19 +141,21 @@ public class WeatherActivity extends AppCompatActivity {
                 URL url = new URL(myUrl);
                 conn = (HttpURLConnection) url.openConnection();
                 BufferedInputStream buffer = new BufferedInputStream(conn.getInputStream());
+                Log.v("인풋스트림", "실행됨");
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(buffer, "utf-8"));
                 String line = null;
                 String page = "";
 
-                while ( (line = bufferedReader.readLine()) != null ) {
+                while ((line = bufferedReader.readLine()) != null) {
                     page += line;
                 }
                 return page;
-            }
-            finally {
+            } catch (Exception e) {
+                Log.v("다운로드", "실패");
+            } finally {
                 conn.disconnect();
             }
+            return "";
         }
     }
-
 }
